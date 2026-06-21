@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class IfraudApplication {
 
 	public static void main(String[] args) {
-        //Configuration of the dotenv- java
-Dotenv dotenv = Dotenv.configure().ignoreIfMalformed().load();
+		//Configuration of the dotenv-java
+		Dotenv dotenv = Dotenv.configure().ignoreIfMalformed().load();
 
-dotenv.entries().forEach((DotenvEntry entry)->System.setProperty(entry.getKey(),entry.getValue()));
+		dotenv.entries().forEach((DotenvEntry entry) -> System.setProperty(entry.getKey(), entry.getValue()));
 
 		SpringApplication.run(IfraudApplication.class, args);
 	}
