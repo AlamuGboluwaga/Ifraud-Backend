@@ -1,8 +1,8 @@
 package com.sotofit.Ifraud.entities;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -14,8 +14,19 @@ import lombok.*;
 @NoArgsConstructor
 public class OrderItem {
 
-	private long id;
-	private long orderId;
-	private int quantity;
-	private long ProductId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@NotBlank(message = "Order id is required")
+	@Column(name = "order_id", nullable = false)
+	private Long orderId;
+
+	@NotNull(message = "Quantity is required")
+	@Column(name = "quantity", nullable = false)
+	private Integer quantity;
+
+	@NotNull(message = "Product id is required")
+	@Column(name = "product_id", nullable = false)
+	private Long ProductId;
 }

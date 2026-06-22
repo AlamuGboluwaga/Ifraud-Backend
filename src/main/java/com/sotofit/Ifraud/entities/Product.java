@@ -1,9 +1,15 @@
 package com.sotofit.Ifraud.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "products")
@@ -14,11 +20,37 @@ import lombok.*;
 @Builder
 public class Product {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@NotBlank(message = "Name is required")
+	@Column(name = "name", nullable = false)
 	private String name;
-	private String Description;
+
+	@NotBlank(message = "Description is required")
+	@Column(name = "description", nullable = false)
+	private String description;
+
+	@NotNull(message = "Price is required")
+	@PositiveOrZero(message = "Price cannot be negative")
+	@Column(name = "price", nullable = false)
 	private BigDecimal price;
-	private String stock;
+
+	@NotNull(message = "Stock is required")
+	@Min(value = 0, message = "Stock cannot be negative")
+	@Column(name = "stock", nullable = false)
+	private Integer stock;
+
+	@NotBlank(message = "Category is required")
+	@Column(name = "category", nullable = false)
 	private String category;
-	private String createdAt;
-	private String UpdatedAt;
+
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
+
+	@UpdateTimestamp
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
 }
