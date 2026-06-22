@@ -25,10 +25,12 @@ public class Product {
 	private Long id;
 
 	@NotBlank(message = "Name is required")
+    @Min(value = 3, message = "Name must be at least 3 characters long")
 	@Column(name = "name", nullable = false)
 	private String name;
 
 	@NotBlank(message = "Description is required")
+    @Min(value = 10, message = "Description must be at least 10 characters long")
 	@Column(name = "description", nullable = false)
 	private String description;
 

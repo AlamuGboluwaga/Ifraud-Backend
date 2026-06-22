@@ -11,7 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ProductController {
 
-//	public CreateProduct() {
-//		return null;
-//	}
-//}
+
+}
