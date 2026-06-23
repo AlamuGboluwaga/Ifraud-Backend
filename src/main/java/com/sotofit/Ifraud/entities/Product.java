@@ -1,12 +1,14 @@
 package com.sotofit.Ifraud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,12 +27,12 @@ public class Product {
 	private Long id;
 
 	@NotBlank(message = "Name is required")
-    @Min(value = 3, message = "Name must be at least 3 characters long")
+	@Size(min = 3, message = "Name must be at least 3 characters long")
 	@Column(name = "name", nullable = false)
 	private String name;
 
 	@NotBlank(message = "Description is required")
-    @Min(value = 10, message = "Description must be at least 10 characters long")
+	@Size(min = 3, message = "Description must be at least 3 characters long")
 	@Column(name = "description", nullable = false)
 	private String description;
 
@@ -40,7 +42,7 @@ public class Product {
 	private BigDecimal price;
 
 	@NotNull(message = "Stock is required")
-	@Min(value = 0, message = "Stock cannot be negative")
+	@Size(min = 3, message = "Description must be at least 3 characters long")
 	@Column(name = "stock", nullable = false)
 	private Integer stock;
 
@@ -55,4 +57,8 @@ public class Product {
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "product")
+	private List<OrderItem> orderItems;
 }

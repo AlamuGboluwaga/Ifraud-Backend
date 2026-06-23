@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.*;
 
 @Entity
@@ -20,6 +21,7 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
 	private Long id;
 
 	@NotBlank(message = "Customer name is required")
@@ -47,4 +49,12 @@ public class Order {
 	@NotNull(message = "Created at is required")
 	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt;
+
+	@PrePersist
+	public void prePersist() {
+		this.createdAt = LocalDateTime.now();
+	}
+
+	@OneToMany(mappedBy = "order")
+	private List<OrderItem> orderItems;
 }
