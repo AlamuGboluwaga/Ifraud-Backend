@@ -23,6 +23,14 @@ public class DeveloperController {
 
 	@GetMapping("/developers")
 	public String developerDetails() {
-		return ("Developer's name  = " + developerName + " and the stack = " + " age = " + age + " project name = "+ project);
+		return (
+			"Developer's name  = " +
+			developerName +
+			" and the stack = " +
+			" age = " +
+			age +
+			" project name = " +
+			project
+		);
 	}
 }
