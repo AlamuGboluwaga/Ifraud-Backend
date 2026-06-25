@@ -1,0 +1,22 @@
+package com.sotofit.Ifraud.controllers;
+
+import com.sotofit.Ifraud.test.Coatch;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TestController {
+
+	private Coatch coatch;
+
+	@Autowired
+	public TestController(Coatch coatch) {
+		this.coatch = coatch;
+	}
+
+	@GetMapping("/test")
+	public String getTEst() {
+		return coatch.learnBoxing();
+	}
+}

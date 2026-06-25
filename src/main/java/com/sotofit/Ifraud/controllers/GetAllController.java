@@ -1,4 +1,4 @@
-package com.sotofit.Ifraud.rest;
+package com.sotofit.Ifraud.controllers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
