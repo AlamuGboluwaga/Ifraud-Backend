@@ -27,4 +27,8 @@ public class TestController {
 	public String getUserById() {
 		return coatch.learnBoxing();
 	}
+    @GetMapping
+    public String getUserAll() {
+        return coatch.learnBoxing();
+    }
 }
