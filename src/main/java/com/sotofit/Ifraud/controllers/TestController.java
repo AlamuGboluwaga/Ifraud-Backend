@@ -31,4 +31,8 @@ public class TestController {
     public String getUserAll() {
         return coatch.learnBoxing();
     }
+    @GetMapping
+    public String deletebyId() {
+        return coatch.learnBoxing();
+    }
 }
