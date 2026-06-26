@@ -14,7 +14,7 @@ public class TestController {
 	public TestController(Coatch coatch) {
 		this.coatch = coatch;
 	}
-
+//This is just for tes
 	@GetMapping("/test")
 	public String getTEst() {
 		return coatch.learnBoxing();
