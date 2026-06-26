@@ -23,7 +23,7 @@ public class TestController {
 		return coatch.learnBoxing();
 	}
 
-	@PostMapping
+	@GetMapping
 	public String getUserById() {
 		return coatch.learnBoxing();
 	}
