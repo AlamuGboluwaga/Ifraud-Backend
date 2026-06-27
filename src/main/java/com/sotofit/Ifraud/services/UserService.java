@@ -11,8 +11,9 @@ public class UserService {
 	private UserRespository userRespository;
 
 	public UserService(UserRespository userRespository) {
-		this.userRespository = userRespository;
-	}
+        this.userRespository =userRespository;
+
+    }
 
 	public List<User> getAllUsers() {
 		var user = userRespository.findAll();
