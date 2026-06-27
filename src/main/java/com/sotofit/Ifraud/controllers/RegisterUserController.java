@@ -2,9 +2,10 @@ package com.sotofit.Ifraud.controllers;
 
 import com.sotofit.Ifraud.entities.RegisterUser;
 import com.sotofit.Ifraud.services.RegisterUserService;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +28,7 @@ public class RegisterUserController {
 	}
 
 	@GetMapping("/registered-user/{id}")
-	public RegisterUser getRegisteredUserById(@Valid @PathVariable("id") UUID id) {
+	public RegisterUser getRegisteredUserById(@PathVariable("id") UUID id) {
 		return registerUserService.getRegisteredUserById(id);
 	}
 }

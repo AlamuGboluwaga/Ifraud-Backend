@@ -1,6 +1,7 @@
 package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -20,19 +21,19 @@ public class RegisterUser {
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
 	private UUID id;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "password", nullable = false)
 	private String password;
 }

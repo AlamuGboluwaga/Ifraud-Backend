@@ -2,18 +2,20 @@ package com.sotofit.Ifraud.services;
 
 import com.sotofit.Ifraud.entities.RegisterUser;
 import com.sotofit.Ifraud.repositories.RegisterUserRepository;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class RegisterUserService {
 
-	private RegisterUserRepository registerUserRepository;
+	private final RegisterUserRepository registerUserRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public RegisterUserService(RegisterUserRepository registerUserRepository) {
 		this.registerUserRepository = registerUserRepository;
@@ -25,10 +27,20 @@ public class RegisterUserService {
 	}
 
 	public RegisterUser registerUser(RegisterUser registerUser) {
+		var user = registerUserRepository
+			.findById(registerUser.getId())
+			.orElseThrow(() -> new RuntimeException("User already exists"));
+		user.setId(registerUser.getId());
+		user.setFirstName(registerUser.getFirstName());
+		user.setLastName(registerUser.getLastName());
+		user.setEmail(registerUser.getEmail());
+
+
+		user.setPassword(registerUser.getPassword());
+
 		return registerUserRepository.save(registerUser);
 	}
 
-	@GetMapping("/registered-user/{id}")
 	public RegisterUser getRegisteredUserById(UUID id) {
 		return registerUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
 	}
