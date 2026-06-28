@@ -4,18 +4,20 @@ import com.sotofit.Ifraud.entities.RegisterUser;
 import com.sotofit.Ifraud.repositories.RegisterUserRepository;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.hibernate.Remove;
+import org.hibernate.sql.Delete;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterUserService {
 
 	private final RegisterUserRepository registerUserRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	//	@Autowired
+	//	private PasswordEncoder passwordEncoder;
 
 	public RegisterUserService(RegisterUserRepository registerUserRepository) {
 		this.registerUserRepository = registerUserRepository;
@@ -27,21 +29,43 @@ public class RegisterUserService {
 	}
 
 	public RegisterUser registerUser(RegisterUser registerUser) {
-		var user = registerUserRepository
-			.findById(registerUser.getId())
-			.orElseThrow(() -> new RuntimeException("User already exists"));
-		user.setId(registerUser.getId());
-		user.setFirstName(registerUser.getFirstName());
-		user.setLastName(registerUser.getLastName());
-		user.setEmail(registerUser.getEmail());
+		//		var user = registerUserRepository
+		//			.findById(registerUser.getId())
+		//			.orElseThrow(() -> new RuntimeException("User already exists"));
+		//		user.setId(registerUser.getId());
+		//		user.setFirstName(registerUser.getFirstName());
+		//		user.setLastName(registerUser.getLastName());
+		//		user.setEmail(registerUser.getEmail());
 
-
-		user.setPassword(registerUser.getPassword());
+		//		String hashedPassword = passwordEncoder.encode(registerUser.getPassword());
+		//		user.setPassword(hashedPassword);
 
 		return registerUserRepository.save(registerUser);
 	}
 
 	public RegisterUser getRegisteredUserById(UUID id) {
-		return registerUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+		return registerUserRepository
+			.findById(id)
+			.orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
+	}
+
+	public RegisterUser updateRegisteredUserBtId(RegisterUser registerUser, UUID id) {
+		var user = registerUserRepository
+			.findById(id)
+			.orElseThrow(() -> new RuntimeException(" The user with " + id + " was not found"));
+		user.setFirstName(registerUser.getFirstName());
+		user.setLastName(registerUser.getFirstName());
+		user.setEmail(registerUser.getEmail());
+		user.setPassword(registerUser.getPassword());
+
+		return registerUserRepository.save(user);
+	}
+
+    @Transactional
+	public void deleteRegisteredUserById(UUID id) {
+		var user = registerUserRepository
+			.findById(id)
+			.orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
+		 registerUserRepository.delete(user);
 	}
 }
