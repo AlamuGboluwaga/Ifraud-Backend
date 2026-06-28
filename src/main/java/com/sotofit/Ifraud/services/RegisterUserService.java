@@ -24,7 +24,7 @@ public class RegisterUserService {
 	}
 
 	public List<RegisterUser> getAllRegisteredUser() {
-		List<RegisterUser> user = registerUserRepository.findAll();
+		var user = registerUserRepository.findAll();
 		return user;
 	}
 
@@ -54,7 +54,7 @@ public class RegisterUserService {
 			.findById(id)
 			.orElseThrow(() -> new RuntimeException(" The user with " + id + " was not found"));
 		user.setFirstName(registerUser.getFirstName());
-		user.setLastName(registerUser.getFirstName());
+		user.setLastName(registerUser.getLastName());
 		user.setEmail(registerUser.getEmail());
 		user.setPassword(registerUser.getPassword());
 

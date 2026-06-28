@@ -1,4 +1,6 @@
 package com.sotofit.Ifraud.controllers;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,3 +12,10 @@ public String GetAll(){
     return "Hello World";
 }
 }
+
+//@Bean
+//public CommandLineRunner commandLineRunner(String[] args) {
+//   return runner ->{
+//       System.out.println("Hello World");
+//   };
+//}
