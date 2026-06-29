@@ -15,5 +15,6 @@ public class IfraudApplication {
 		dotenv.entries().forEach((DotenvEntry entry) -> System.setProperty(entry.getKey(), entry.getValue()));
 
 		SpringApplication.run(IfraudApplication.class, args);
+        System.out.println("Database is running on PORT 7070 ");
 	}
 }

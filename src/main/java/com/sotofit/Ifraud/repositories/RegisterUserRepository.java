@@ -7,3 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RegisterUserRepository extends JpaRepository<RegisterUser, UUID> {}
+
+
+//public interface RegisterUserRepository extends JpaRepository<RegisterUser, UUID> {}
+//public interface RegisterUserRepository implement JpaRepository<RegisterUser, UUID> {}

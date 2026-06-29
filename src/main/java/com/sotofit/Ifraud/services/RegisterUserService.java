@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.UUID;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.hibernate.Remove;
-import org.hibernate.sql.Delete;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,11 +59,11 @@ public class RegisterUserService {
 		return registerUserRepository.save(user);
 	}
 
-    @Transactional
+	@Transactional
 	public void deleteRegisteredUserById(UUID id) {
 		var user = registerUserRepository
 			.findById(id)
 			.orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
-		 registerUserRepository.delete(user);
+		registerUserRepository.delete(user);
 	}
 }
