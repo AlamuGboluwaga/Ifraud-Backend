@@ -12,10 +12,17 @@ public class SecurityConfig {
 
 	@Bean
 	public InMemoryUserDetailsManager userDetailsManager() {
-		UserDetails gboluwaga = User.builder().username("gboluwaga").password("password").roles("ADMIN").build();
-		UserDetails adeoye = User.builder().username("adeoye").password("password").roles("MANAGER").build();
-		UserDetails oluwatosin = User.builder().username("oluwatosin").password("password").roles("EMPLOYEE").build();
+		UserDetails gboluwaga = User.builder().username("gboluwaga").password("{noop}password").roles("ADMIN").build();
+		UserDetails adeoye = User.builder().username("adeoye").password("{noop}password").roles("MANAGER").build();
+		UserDetails oluwatosin = User
+			.builder()
+			.username("oluwatosin")
+			.password("{noop}password")
+			.roles("EMPLOYEE")
+			.build();
 
-		return new InMemoryUserDetailsManager();
+		return new InMemoryUserDetailsManager(gboluwaga, adeoye, oluwatosin);
 	}
+
+
 }
