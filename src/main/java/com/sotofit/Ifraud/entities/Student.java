@@ -1,8 +1,10 @@
 package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "students")
@@ -15,30 +17,62 @@ public class Student {
 	@NotBlank
 	@Column(name = "sur_name", nullable = false)
 	private String surName;
-    @NotBlank
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
 
-    @NotBlank
-    @Column(name = "email", nullable = false)
-    private String email;
+	@NotBlank
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
 
-    @NotBlank
-    @Column(name = "phone", nullable = false)
-    private String Phone;
+	@NotBlank
+	@Column(name = "email", nullable = false)
+	private String email;
 
-    @NotBlank
-    @Column(name = "address", nullable = false)
-    private String address;
+	@NotEmpty
+	@Size(min = 11, max = 11, message = "Phone number must be exactly 11 digits")
+	@Pattern(regexp = "^\\d{11}$", message = "Phone number must contain only digits")
+	@Column(name = "phone", nullable = false, length = 11)
+	private String phone;
 
-    @NotBlank
+	@NotBlank
+	@Column(name = "address", nullable = false)
+	private String address;
+
+    @NotNull
     @Column(name = "date_of_birth", nullable = false)
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    @NotBlank
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @NotNull
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
+
+
+    public Student(){
+
+    }
+
+    public Student(String surName, String firstName, String email, String phone, String address, LocalDate dateOfBirth, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.surName = surName;
+        this.firstName = firstName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    @PrePersist
+    protected void  onCreate(){
+       LocalDateTime date = LocalDateTime.now();
+        this.createdAt = date;
+        this.updatedAt = date;
+    }
+
+    protected void onUpdate(){
+        this.updatedAt = LocalDateTime.now();
+    }
     public Long getId() {
         return id;
     }
@@ -72,11 +106,11 @@ public class Student {
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -87,11 +121,11 @@ public class Student {
         this.address = address;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -103,5 +137,26 @@ public class Student {
         this.createdAt = createdAt;
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", surName='" + surName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

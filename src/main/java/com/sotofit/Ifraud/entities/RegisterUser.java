@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "register_users")
+@Table(name = "register_users",indexes = @Index(name="email",columnList = "email", unique = true))
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,4 +36,9 @@ public class RegisterUser {
 	@NotBlank
 	@Column(name = "password", nullable = false)
 	private String password;
+
+//    @NotBlank
+//    @Column(name = "role", nullable = false)
+//    private String role;
+
 }

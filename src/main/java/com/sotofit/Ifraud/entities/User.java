@@ -33,6 +33,11 @@ public class User {
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
+    @NotBlank
+    @Column(name = "role", nullable = false)
+    private String role;
+
+
 	@NotNull
 	@Column(name = "password", nullable = false)
 	private String password;

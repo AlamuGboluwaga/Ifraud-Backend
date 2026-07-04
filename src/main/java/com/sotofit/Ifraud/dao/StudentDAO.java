@@ -1,4 +1,4 @@
-package com.sotofit.Ifraud.Dao;
+package com.sotofit.Ifraud.dao;
 
 import com.sotofit.Ifraud.entities.Student;
 
