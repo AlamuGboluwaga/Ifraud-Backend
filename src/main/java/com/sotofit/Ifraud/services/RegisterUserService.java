@@ -26,10 +26,7 @@ public class RegisterUserService {
 	public List<RegisteredUserResponseDTO> getAllRegisteredUser() {
 		var users = registerUserRepository.findAll();
 
-		var userDto = users
-			.stream()
-			.map(user -> RegisterMapper.registeredUserMapperDTO(user))
-			.toList();
+		var userDto = users.stream().map(RegisterMapper::registeredUserMapperDTO).toList();
 
 		return userDto;
 	}
