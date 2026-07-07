@@ -1,4 +1,4 @@
 package com.sotofit.Ifraud.mapper;
 
-public class CustomeronBoardingMapper {
+public class CustomerOnBoardingMapper {
 }
