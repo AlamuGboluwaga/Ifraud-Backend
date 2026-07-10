@@ -18,7 +18,7 @@ import lombok.Setter;
 public class RegisterUser {
 
 	@Id
-	@GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
 	private UUID id;
 
 	@NotBlank
@@ -33,9 +33,7 @@ public class RegisterUser {
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@NotBlank
-	@Column(name = "password", nullable = false)
-	private String password;
+
 
 //    @NotBlank
 //    @Column(name = "role", nullable = false)

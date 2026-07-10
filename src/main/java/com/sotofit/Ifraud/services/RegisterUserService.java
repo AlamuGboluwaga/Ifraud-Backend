@@ -1,6 +1,6 @@
 package com.sotofit.Ifraud.services;
 
-import com.sotofit.Ifraud.dtos.RegisteredUserResponseDTO;
+import com.sotofit.Ifraud.dtos.RegisteredUserResponseDto;
 import com.sotofit.Ifraud.entities.RegisterUser;
 import com.sotofit.Ifraud.mapper.RegisterMapper;
 import com.sotofit.Ifraud.repositories.RegisterUserRepository;
@@ -23,10 +23,11 @@ public class RegisterUserService {
 		this.registerUserRepository = registerUserRepository;
 	}
 
-	public List<RegisteredUserResponseDTO> getAllRegisteredUser() {
+	public List<RegisteredUserResponseDto> getAllRegisteredUser() {
 		var users = registerUserRepository.findAll();
 
-		var userDto = users.stream().map(RegisterMapper::registeredUserMapperDTO).toList();
+		//        var userDto = users.stream().map(user->RegisterMapper.registeredUserMapperDTO(user)).toList();
+		List<RegisteredUserResponseDto> userDto = users.stream().map(RegisterMapper::registeredUserMapperDTO).toList();
 
 		return userDto;
 	}
@@ -59,7 +60,6 @@ public class RegisterUserService {
 		user.setFirstName(registerUser.getFirstName());
 		user.setLastName(registerUser.getLastName());
 		user.setEmail(registerUser.getEmail());
-		user.setPassword(registerUser.getPassword());
 
 		return registerUserRepository.save(user);
 	}

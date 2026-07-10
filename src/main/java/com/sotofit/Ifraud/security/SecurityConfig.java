@@ -1,17 +1,18 @@
 package com.sotofit.Ifraud.security;
 
-import com.sotofit.Ifraud.entities.RegisterUser;
-import org.springframework.boot.micrometer.observation.autoconfigure.ObservationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
 	@Bean
@@ -21,7 +22,7 @@ public class SecurityConfig {
 		UserDetails oluwatosin = User
 			.builder()
 			.username("oluwatosin")
-			.password("{noop}password")
+			.password("{noop}passwords")
 			.roles("EMPLOYEE")
 			.build();
 
@@ -29,18 +30,26 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(configurer ->
 			configurer
-				.requestMatchers(HttpMethod.GET, "/api/**")
-				.hasRole("EMPLOYER")
-				.requestMatchers(HttpMethod.POST, "/api/**")
+				.requestMatchers(HttpMethod.GET, "/api/ifraud/**")
+				.hasRole("EMPLOYEE")
+				.requestMatchers(HttpMethod.POST, "/api/ifraud/**")
 				.hasRole("MANAGER")
-				.requestMatchers(HttpMethod.PUT, "/api/**")
+				.requestMatchers(HttpMethod.PUT, "/api/ifraud/**")
 				.hasRole("MANAGER")
-				.requestMatchers(HttpMethod.DELETE, "/api/**")
-				.hasAnyRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE, "/api/ifraud/**")
+				.hasRole("ADMIN")
+				.anyRequest()
+				.authenticated()
 		);
-		return null;
+
+		// use HTTP Basic Authentication
+		http.httpBasic(Customizer.withDefaults());
+		// disable Cross Site Request Forgery (CSRF)
+		// in general, not required for stateless REST API that use POST, PUT /OR PATCH, DELETE
+		http.csrf(csrf -> csrf.disable());
+		return http.build();
 	}
 }

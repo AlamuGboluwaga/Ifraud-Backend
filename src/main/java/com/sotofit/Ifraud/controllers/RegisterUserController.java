@@ -1,6 +1,7 @@
 package com.sotofit.Ifraud.controllers;
 
-import com.sotofit.Ifraud.dtos.RegisteredUserResponseDTO;
+
+import com.sotofit.Ifraud.dtos.RegisteredUserResponseDto;
 import com.sotofit.Ifraud.entities.RegisterUser;
 import com.sotofit.Ifraud.services.RegisterUserService;
 import java.util.List;
@@ -25,7 +26,7 @@ public class RegisterUserController {
 	}
 
 	@GetMapping("/registered-users")
-	public List<RegisteredUserResponseDTO> getAllRegisteredUser() {
+	public List<RegisteredUserResponseDto> getAllRegisteredUser() {
 		return registerUserService.getAllRegisteredUser();
 	}
 
