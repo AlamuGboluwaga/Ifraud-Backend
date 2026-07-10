@@ -31,8 +31,8 @@ public class RegisterUserController {
 	}
 
 	@GetMapping("/registered-user/{id}")
-	public RegisterUser getRegisteredUserById(@PathVariable("id") UUID id) {
-		return registerUserService.getRegisteredUserById(id);
+	public ResponseEntity<RegisterUser> getRegisteredUserById(@PathVariable("id") UUID id) {
+		return ResponseEntity.status(201).body(registerUserService.getRegisteredUserById(id));
 	}
 
     @PutMapping("update-registered-user/{id}")

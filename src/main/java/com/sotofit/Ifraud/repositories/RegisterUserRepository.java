@@ -1,12 +1,16 @@
 package com.sotofit.Ifraud.repositories;
 
 import com.sotofit.Ifraud.entities.RegisterUser;
+
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegisterUserRepository extends JpaRepository<RegisterUser, UUID> {}
+public interface RegisterUserRepository extends JpaRepository<RegisterUser, UUID> {
+Optional<RegisterUser> findByEmail(String email);
+}
 
 
 //public interface RegisterUserRepository extends JpaRepository<RegisterUser, UUID> {}
