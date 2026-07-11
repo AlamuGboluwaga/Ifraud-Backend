@@ -1,5 +1,6 @@
 package com.sotofit.Ifraud.services;
 
+import com.sotofit.Ifraud.dtos.CreditRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberResponseDto;
 import com.sotofit.Ifraud.dtos.CustomerOnBoardingDto;
@@ -11,6 +12,9 @@ import com.sotofit.Ifraud.repositories.CustomerOnBoardingRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
+import org.jspecify.annotations.Nullable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -74,15 +78,27 @@ public class CustomerOnboardingServices {
 		return customerAccountNumberResponseMapper.toDto(customerAccountNumber);
 	}
 
-	public String creditCustomerAccount(String accountNumber,BigDecimal amount) {
-		if (amount.compareTo(BigDecimal.ZERO) < 0) {
-			return "Amount cannot be negative";
+	public ResponseEntity<?> creditCustomerAccount(CreditRequestDto requestDto) {
+		if (requestDto.getAmount() == null) {
+            return ResponseEntity.status(400).body("Amount can not be empty");
 		}
-		var customer = repository.findByAccountNumber(accountNumber).orElseThrow(()-> new RuntimeException("Customer with account number "+accountNumber+ " was not found" ));
+		if (requestDto.getAmount().compareTo(BigDecimal.ZERO) < 0) {
+			return ResponseEntity.status(400).body("Amount cannot be negative");
+		}
+
+		System.out.println("ACoount number = " + requestDto.getAccountNumber() + " Amount = " + requestDto);
+		var accountNumber = requestDto.getAccountNumber();
+		var amount = requestDto.getAmount();
+
+		var customer = repository
+			.findByAccountNumber(accountNumber)
+			.orElseThrow(() -> new RuntimeException("Customer with account number " + accountNumber + " was not found")
+			);
 
 		customer.getBalance().add(amount);
 
-        repository.save(customer);
-		return customer.getBalance().toString();
+		repository.save(customer);
+
+		return ResponseEntity.ok(customer.getBalance());
 	}
 }

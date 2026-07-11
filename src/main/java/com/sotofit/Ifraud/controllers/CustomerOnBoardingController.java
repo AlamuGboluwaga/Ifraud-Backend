@@ -1,12 +1,12 @@
 package com.sotofit.Ifraud.controllers;
 
+import com.sotofit.Ifraud.dtos.CreditRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberResponseDto;
 import com.sotofit.Ifraud.dtos.CustomerOnBoardingDto;
 import com.sotofit.Ifraud.entities.CustomerOnboarding;
 import com.sotofit.Ifraud.services.CustomerOnboardingServices;
 import jakarta.validation.Valid;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -45,16 +45,16 @@ public class CustomerOnBoardingController {
 	}
 
 	@PostMapping("onboarded-customers/account-number")
-	public ResponseEntity<CustomerAccountNumberResponseDto> getCustomerByAccountNumber(@Valid @RequestBody CustomerAccountNumberRequestDto request) {
-
-
-        return ResponseEntity.ok(services.getCustomerAccountNumber(request));
+	public ResponseEntity<CustomerAccountNumberResponseDto> getCustomerByAccountNumber(
+		@Valid @RequestBody CustomerAccountNumberRequestDto request
+	) {
+		return ResponseEntity.ok(services.getCustomerAccountNumber(request));
 	}
 
-    @PostMapping("onboarded-customers/credit-account")
-    public String creditCustomerAccount(String accountNumber,BigDecimal amount){
+	@PostMapping("onboarded-customers/credit-account")
+	public ResponseEntity<?> creditCustomerAccount(@Valid @RequestBody CreditRequestDto requestDto) {
 
 
-       return services.creditCustomerAccount(accountNumber,amount) ;
-    }
+		return ResponseEntity.ok( services.creditCustomerAccount(requestDto));
+	}
 }
