@@ -1,8 +1,5 @@
 package com.sotofit.Ifraud.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,8 +9,7 @@ import java.util.UUID;
 
 public class CustomerOnBoardingDto {
 
-	@Id
-	@GeneratedValue
+
 	private UUID id;
 
 	@NotBlank

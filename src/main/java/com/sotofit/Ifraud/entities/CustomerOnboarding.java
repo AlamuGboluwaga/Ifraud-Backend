@@ -2,7 +2,6 @@ package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -30,9 +29,8 @@ public class CustomerOnboarding {
 	private String email;
 
 	@NotBlank
-	@Column(name = "account_number", nullable = false,unique = true)
-    @Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
-
+	@Column(name = "account_number", nullable = false, unique = true)
+	@Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
 	private String accountNumber;
 
 	@NotNull
