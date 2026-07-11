@@ -2,15 +2,19 @@ package com.sotofit.Ifraud.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
 
 public class CreditRequestDto {
 
-	@NotNull
+	@NotNull(message = "Account number is required")
+    @Positive(message = "Account number can not be negative")
+    @Size(max = 11, min = 11, message = "Account Number must be 11 digits ")
 	private String accountNumber;
 
 	@NotNull
-    @Positive(message = "Amount can not be negative")
+    @Positive(message = "Amount can not be negative ")
 	private BigDecimal amount;
 
     public String getAccountNumber() {

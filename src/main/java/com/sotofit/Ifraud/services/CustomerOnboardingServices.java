@@ -12,7 +12,6 @@ import com.sotofit.Ifraud.repositories.CustomerOnBoardingRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -79,26 +78,18 @@ public class CustomerOnboardingServices {
 	}
 
 	public ResponseEntity<?> creditCustomerAccount(CreditRequestDto requestDto) {
-		if (requestDto.getAmount() == null) {
-            return ResponseEntity.status(400).body("Amount can not be empty");
-		}
-		if (requestDto.getAmount().compareTo(BigDecimal.ZERO) < 0) {
-			return ResponseEntity.status(400).body("Amount cannot be negative");
-		}
-
-		System.out.println("ACoount number = " + requestDto.getAccountNumber() + " Amount = " + requestDto);
 		var accountNumber = requestDto.getAccountNumber();
 		var amount = requestDto.getAmount();
-
 		var customer = repository
 			.findByAccountNumber(accountNumber)
 			.orElseThrow(() -> new RuntimeException("Customer with account number " + accountNumber + " was not found")
 			);
 
-		customer.getBalance().add(amount);
+		var newBalance = customer.getBalance().add(amount);
+		customer.setBalance(newBalance);
 
 		repository.save(customer);
 
-		return ResponseEntity.ok(customer.getBalance());
+		return ResponseEntity.ok(customer);
 	}
 }
