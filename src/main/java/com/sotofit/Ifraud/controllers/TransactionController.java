@@ -1,8 +1,6 @@
 package com.sotofit.Ifraud.controllers;
 
-import com.sotofit.Ifraud.dtos.CreditRequestDto;
-import com.sotofit.Ifraud.entities.CustomerOnboarding;
-import com.sotofit.Ifraud.services.CustomerOnboardingServices;
+import com.sotofit.Ifraud.dtos.TransferRequestDto;
 import com.sotofit.Ifraud.services.TransferServices;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TransactionController {
 
-    private TransferServices transferServices;
+	private TransferServices transferServices;
 
-    public TransactionController(TransferServices transferServices) {
-        this.transferServices = transferServices;
-    }
+	public TransactionController(TransferServices transferServices) {
+		this.transferServices = transferServices;
+	}
 
-    @PostMapping("/transfer")
-    public ResponseEntity<?> transfer(@Valid @RequestBody CreditRequestDto request) {
-        transferServices.transfer(request);
-        return null;
-    }
+	@PostMapping("/transfer")
+	public ResponseEntity<?> transfer(@Valid @RequestBody TransferRequestDto request) {
+		return transferServices.transfer(request);
+	}
 }
