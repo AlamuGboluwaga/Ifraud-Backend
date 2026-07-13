@@ -48,9 +48,7 @@ public class RegisterUserService {
 	}
 
 	public RegisterUser getRegisteredUserById(UUID id) {
-		return registerUserRepository
-			.findById(id)
-			.orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
+		return registerUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
 	}
 
 	public RegisterUser updateRegisteredUserBtId(RegisterUser registerUser, UUID id) {
