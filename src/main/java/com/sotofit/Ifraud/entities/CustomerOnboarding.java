@@ -47,6 +47,9 @@ public class CustomerOnboarding {
 
 	public CustomerOnboarding() {}
 
+	@Version
+	private Long version;
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = LocalDateTime.now();
@@ -57,6 +60,10 @@ public class CustomerOnboarding {
 	protected void onUpdate() {
 		this.updatedAt = LocalDateTime.now();
 	}
+
+	@NotBlank
+	@Column(name = "user_id", nullable = false)
+	private UUID userId;
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -120,5 +127,13 @@ public class CustomerOnboarding {
 
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
 	}
 }

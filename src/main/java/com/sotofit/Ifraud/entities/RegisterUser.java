@@ -2,7 +2,6 @@ package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "register_users",indexes = @Index(name="email",columnList = "email", unique = true))
+@Table(name = "register_users", indexes = @Index(name = "email", columnList = "email", unique = true))
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,7 +17,7 @@ import lombok.Setter;
 public class RegisterUser {
 
 	@Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
 	@NotBlank
@@ -32,11 +31,8 @@ public class RegisterUser {
 	@NotBlank
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
-
-
-
-//    @NotBlank
-//    @Column(name = "role", nullable = false)
-//    private String role;
+	//    @NotBlank
+	//    @Column(name = "role", nullable = false)
+	//    private String role;
 
 }
