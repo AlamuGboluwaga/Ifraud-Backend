@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public class CustomerOnBoardingDto {
 
-
 	private UUID id;
 
 	@NotBlank
@@ -29,15 +28,15 @@ public class CustomerOnBoardingDto {
 	@NotNull
 	private BigDecimal balance;
 
-    public UUID getId() {
-        return id;
-    }
+	public UUID getId() {
+		return id;
+	}
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    public String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 

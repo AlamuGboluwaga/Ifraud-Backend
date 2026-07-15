@@ -19,20 +19,15 @@ public class SecurityConfig {
 	public InMemoryUserDetailsManager userDetailsManager() {
 		UserDetails gboluwaga = User.builder().username("gboluwaga").password("{noop}password").roles("ADMIN").build();
 		UserDetails adeoye = User.builder().username("adeoye").password("{noop}password").roles("MANAGER").build();
-		UserDetails oluwatosin = User
-			.builder()
-			.username("oluwatosin")
-			.password("{noop}passwords")
-			.roles("EMPLOYEE")
-			.build();
+		UserDetails oluwatosin = User.builder().username("oluwatosin").password("{noop}passwords").roles("EMPLOYEE").build();
 
 		return new InMemoryUserDetailsManager(gboluwaga, adeoye, oluwatosin);
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(configurer ->
-			configurer
+		http.authorizeHttpRequests(auth ->
+			auth
 				.requestMatchers(HttpMethod.GET, "/api/ifraud/**")
 				.hasRole("EMPLOYEE")
 				.requestMatchers(HttpMethod.POST, "/api/ifraud/**")
@@ -41,7 +36,7 @@ public class SecurityConfig {
 				.hasRole("MANAGER")
 				.requestMatchers(HttpMethod.DELETE, "/api/ifraud/**")
 				.hasRole("ADMIN")
-				.anyRequest()
+			.anyRequest()
 				.authenticated()
 		);
 
