@@ -26,7 +26,7 @@ public class RegisterUserService {
 	public List<RegisteredUserResponseDto> getAllRegisteredUser() {
 		var users = registerUserRepository.findAll();
 
-		//        var userDto = users.stream().map(user->RegisterMapper.registeredUserMapperDTO(user)).toList();
+		//var userDto = users.stream().map(user->RegisterMapper.registeredUserMapperDTO(user)).toList();
 		List<RegisteredUserResponseDto> userDto = users.stream().map(RegisterMapper::registeredUserMapperDTO).toList();
 
 		return userDto;
@@ -48,7 +48,9 @@ public class RegisterUserService {
 	}
 
 	public RegisterUser getRegisteredUserById(UUID id) {
-		return registerUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
+		return registerUserRepository
+			.findById(id)
+			.orElseThrow(() -> new RuntimeException("User with id " + id + " was not found"));
 	}
 
 	public RegisterUser updateRegisteredUserBtId(RegisterUser registerUser, UUID id) {

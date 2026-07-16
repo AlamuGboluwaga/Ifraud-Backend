@@ -3,6 +3,7 @@ package com.sotofit.Ifraud.dtos;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class RegisteredUserResponseDto {
@@ -11,14 +12,47 @@ public class RegisteredUserResponseDto {
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
 	private UUID id;
 
-	@NotBlank
+	@NotBlank(message = "First Name is required")
 	private String firstName;
 
-	@NotBlank
+	@NotBlank(message = "Last Name is required")
 	private String lastName;
 
-	@NotBlank
+	@NotBlank(message = "Email is required")
 	private String email;
+
+	@NotBlank(message = "Password is required")
+	private String password;
+
+	@NotBlank(message = "Role is required")
+	private String role;
+
+	@NotNull(message = "Active is required")
+	private Boolean isActive;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean active) {
+		isActive = active;
+	}
 
 	public UUID getId() {
 		return id;

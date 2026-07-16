@@ -2,6 +2,7 @@ package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,16 @@ public class RegisterUser {
 	@NotBlank
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
-	//    @NotBlank
-	//    @Column(name = "role", nullable = false)
-	//    private String role;
 
+	@NotNull(message = "Password is required")
+	@Column(name = "password", nullable = false)
+	private String password;
+
+	@NotBlank
+	@Column(name = "role", nullable = false)
+	private String role;
+
+	@NotNull(message = "Active is required")
+	@Column(name = "is_active", nullable = false)
+	private Boolean isActive;
 }

@@ -5,8 +5,6 @@ import com.sotofit.Ifraud.entities.RegisterUser;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
 public class RegisterMapper {
 
 	public static RegisteredUserResponseDto registeredUserMapperDTO(RegisterUser registerUser) {
@@ -15,6 +13,7 @@ public class RegisterMapper {
 		dto.setFirstName(registerUser.getFirstName());
 		dto.setLastName(registerUser.getLastName());
 		dto.setEmail(registerUser.getEmail());
+		dto.setIsActive(registerUser.getIsActive());
 		return dto;
 	}
 }

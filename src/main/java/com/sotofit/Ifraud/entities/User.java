@@ -12,7 +12,7 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,18 +27,20 @@ public class User {
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-
 	@NotBlank
-    @Email(message = "Invalid email format")
+	@Email(message = "Invalid email format")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
-
-    @NotBlank
-    @Column(name = "role", nullable = false)
-    private String role;
-
 
 	@NotNull
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@NotBlank
+	@Column(name = "role", nullable = false)
+	private String role;
+
+	@NotNull(message = "Active is required")
+	@Column(name = "is_active", nullable = false)
+	private Boolean isActive;
 }
