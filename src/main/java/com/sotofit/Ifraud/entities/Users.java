@@ -1,9 +1,7 @@
 package com.sotofit.Ifraud.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -50,6 +48,7 @@ public class Users {
 	public void User() {}
 
 	public void User(
+		String firstname,
 		String email,
 		String phone,
 		String password,
@@ -58,10 +57,14 @@ public class Users {
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt
 	) {
+		this.firstname = firstname;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
 		this.role = role;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public String getFirstname() {

@@ -1,12 +1,12 @@
 package com.sotofit.Ifraud.controllers;
 
 import com.sotofit.Ifraud.dtos.UserRequestByEmail;
+import com.sotofit.Ifraud.dtos.UserUpdateRequest;
 import com.sotofit.Ifraud.dtos.UsersRequest;
 import com.sotofit.Ifraud.dtos.UsersResponse;
 import com.sotofit.Ifraud.services.UsersService;
 import jakarta.validation.Valid;
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,18 @@ public class UsersController {
 	}
 
 	@PostMapping("/user/email")
-	public UsersResponse getUserByEmail(@Valid @RequestBody UserRequestByEmail requestByEmail) {
-		return usersService.getUserByEmail(requestByEmail);
+	public ResponseEntity<UsersResponse> getUserByEmail(@Valid @RequestBody UserRequestByEmail requestByEmail) {
+		return ResponseEntity.ok(usersService.getUserByEmail(requestByEmail));
+	}
+
+	@PutMapping("user/{email}")
+	public ResponseEntity<UsersResponse> updateUserByEmail(
+		@Valid @RequestBody UserUpdateRequest userUpdateRequest,
+		@Valid @PathVariable String email
+	) {
+
+System.out.println("email " + email);
+
+		return ResponseEntity.ok(usersService.updateByEmail(userUpdateRequest, email));
 	}
 }

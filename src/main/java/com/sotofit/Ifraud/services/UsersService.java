@@ -1,8 +1,10 @@
 package com.sotofit.Ifraud.services;
 
 import com.sotofit.Ifraud.dtos.UserRequestByEmail;
+import com.sotofit.Ifraud.dtos.UserUpdateRequest;
 import com.sotofit.Ifraud.dtos.UsersRequest;
 import com.sotofit.Ifraud.dtos.UsersResponse;
+import com.sotofit.Ifraud.entities.Users;
 import com.sotofit.Ifraud.mapper.UsersMapper;
 import com.sotofit.Ifraud.repositories.UsersRepository;
 import java.util.List;
@@ -44,5 +46,27 @@ public class UsersService {
 			.orElseThrow(() -> new IllegalArgumentException("User with " + email + " was not found"));
 
 		return usersmapper.toDto(user);
+	}
+
+	public UsersResponse updateByEmail(UserUpdateRequest userUpdateRequest, String email) {
+		if (email == null) {
+			throw new IllegalArgumentException("User id is required");
+		}
+		//b808aaba-997a-43a3-a946-e8bd1f1e9c32
+		var user = usersRepository
+			.findByEmail(email)
+			.orElseThrow(() -> new IllegalArgumentException("User with " + email + " was not found"));
+
+		Users users = new Users();
+		users.setId(user.getId());
+		users.setFirstname(userUpdateRequest.getFirstname());
+		users.setPhone(userUpdateRequest.getPhone());
+		users.setPassword(userUpdateRequest.getPassword());
+		users.setRole(userUpdateRequest.getRole());
+		users.setUpdatedAt(userUpdateRequest.getUpdatedAt());
+		users.setActive(userUpdateRequest.getActive());
+
+		usersRepository.save(users);
+		return usersmapper.toDto(users);
 	}
 }

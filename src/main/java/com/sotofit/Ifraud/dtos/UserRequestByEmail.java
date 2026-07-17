@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 public class UserRequestByEmail {
 
 	@NotNull(message = "User Id is required")
+	private String firstname;
+
+	@NotNull(message = "User Id is required")
 	private String email;
 
 	public String getEmail() {
