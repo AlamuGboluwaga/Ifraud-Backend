@@ -1,12 +1,11 @@
 package com.sotofit.Ifraud.services;
 
-import com.sotofit.Ifraud.dtos.UserRequestById;
+import com.sotofit.Ifraud.dtos.UserRequestByEmail;
 import com.sotofit.Ifraud.dtos.UsersRequest;
 import com.sotofit.Ifraud.dtos.UsersResponse;
 import com.sotofit.Ifraud.mapper.UsersMapper;
 import com.sotofit.Ifraud.repositories.UsersRepository;
 import java.util.List;
-import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,16 +32,16 @@ public class UsersService {
 		return entity.stream().map(usersmapper::toDto).toList();
 	}
 
-	public UsersResponse getUserById(UserRequestById requestById) {
-        UUID id = requestById.getId();
+	public UsersResponse getUserByEmail(UserRequestByEmail requestByEmail) {
+		String email = requestByEmail.getEmail();
 
-        if (id == null) {
+		if (email == null) {
 			throw new IllegalArgumentException("User id is required");
 		}
 
 		var user = usersRepository
-			.findById(id)
-			.orElseThrow(() -> new IllegalArgumentException("User with " + id + " was not found"));
+			.findByEmail(email)
+			.orElseThrow(() -> new IllegalArgumentException("User with " + email + " was not found"));
 
 		return usersmapper.toDto(user);
 	}

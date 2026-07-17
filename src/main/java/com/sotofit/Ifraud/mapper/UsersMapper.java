@@ -1,8 +1,6 @@
 package com.sotofit.Ifraud.mapper;
 
-import static java.lang.Boolean.TRUE;
-
-import com.sotofit.Ifraud.dtos.UserRequestById;
+import com.sotofit.Ifraud.dtos.UserRequestByEmail;
 import com.sotofit.Ifraud.dtos.UsersRequest;
 import com.sotofit.Ifraud.dtos.UsersResponse;
 import com.sotofit.Ifraud.entities.Users;
@@ -39,9 +37,9 @@ public class UsersMapper {
 		return userRes;
 	}
 
-	public Users toEntity(UserRequestById usersRequestById) {
+	public Users toEntity(UserRequestByEmail usersRequestByEmail) {
 		Users userReq = new Users();
-		userReq.setId(usersRequestById.getId());
+		userReq.setEmail(usersRequestByEmail.getEmail());
 		return userReq;
 	}
 }
