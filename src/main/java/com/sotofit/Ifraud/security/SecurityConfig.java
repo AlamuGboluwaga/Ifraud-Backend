@@ -12,10 +12,10 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain basicAuth(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth ->
-			auth.requestMatchers("/api/ifraud/**").permitAll().anyRequest().authenticated()
-		).httpBasic(Customizer.withDefaults());
-
+		http
+			.authorizeHttpRequests(auth -> auth.requestMatchers("/**").permitAll().anyRequest().authenticated())
+			.httpBasic(Customizer.withDefaults())
+			.csrf(csrf -> csrf.disable());
 		return http.build();
 	}
 }

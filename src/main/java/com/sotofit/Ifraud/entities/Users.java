@@ -3,6 +3,8 @@ package com.sotofit.Ifraud.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -11,10 +13,13 @@ import java.util.UUID;
 public class Users {
 
 	@Id
-	@NotBlank(message = "Id is required")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private UUID id;
+
+	@NotNull(message = "First Name is required")
+	@Column(name = "firstname", nullable = false)
+	private String firstname;
 
 	@NotNull(message = "Email is required")
 	@Column(name = "email", nullable = false, unique = true)
@@ -22,6 +27,7 @@ public class Users {
 
 	@NotNull(message = "Phone is required")
 	@Column(name = "phone", nullable = false, unique = true)
+	@Size(min = 11, max = 11, message = "Phone number must be 11 digits")
 	private String phone;
 
 	@NotNull(message = "Password is required")
@@ -32,15 +38,12 @@ public class Users {
 	@Column(name = "role", nullable = false)
 	private String role;
 
-	@NotNull(message = "Active is required")
 	@Column(name = "is_active", nullable = false)
 	private Boolean isActive;
 
-	@NotBlank(message = "Created At is required")
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
-	@NotBlank(message = "Updated At is required")
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
 
@@ -59,21 +62,26 @@ public class Users {
 		this.phone = phone;
 		this.password = password;
 		this.role = role;
-		this.isActive = isActive;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	@PrePersist
 	public void onCreate() {
-		LocalDateTime date = LocalDateTime.now();
-		this.createdAt = date;
-		this.updatedAt = date;
+		createdAt = LocalDateTime.now();
+		updatedAt = LocalDateTime.now();
+		this.isActive = true;
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updatedAt = LocalDateTime.now();
+		updatedAt = LocalDateTime.now();
 	}
 
 	public String getEmail() {
@@ -130,5 +138,13 @@ public class Users {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 }
