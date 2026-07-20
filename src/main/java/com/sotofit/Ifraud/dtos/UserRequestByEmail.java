@@ -1,13 +1,13 @@
 package com.sotofit.Ifraud.dtos;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class UserRequestByEmail {
 
-	@NotNull(message = "User Id is required")
-	private String firstname;
-
-	@NotNull(message = "User Id is required")
+@NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
 	private String email;
 
 	public String getEmail() {

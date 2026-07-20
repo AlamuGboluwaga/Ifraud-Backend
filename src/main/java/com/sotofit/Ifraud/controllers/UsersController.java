@@ -29,7 +29,7 @@ public class UsersController {
 		return ResponseEntity.ok(usersService.getAllUsers());
 	}
 
-	@PostMapping("/user/email")
+	@PostMapping("/users/email")
 	public ResponseEntity<UsersResponse> getUserByEmail(@Valid @RequestBody UserRequestByEmail requestByEmail) {
 		return ResponseEntity.ok(usersService.getUserByEmail(requestByEmail));
 	}
@@ -39,8 +39,7 @@ public class UsersController {
 		@Valid @RequestBody UserUpdateRequest userUpdateRequest,
 		@Valid @PathVariable String email
 	) {
-
-System.out.println("email " + email);
+		System.out.println("email " + email);
 
 		return ResponseEntity.ok(usersService.updateByEmail(userUpdateRequest, email));
 	}
