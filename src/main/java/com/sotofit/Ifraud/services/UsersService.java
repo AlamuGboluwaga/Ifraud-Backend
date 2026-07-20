@@ -36,9 +36,9 @@ public class UsersService {
 
 	public UsersResponse getUserByEmail(UserRequestByEmail requestByEmail) {
 		String email = requestByEmail.getEmail();
-
+		System.out.println("emailAddress " + email);
 		if (email == null) {
-			throw new IllegalArgumentException("User id is required");
+			throw new IllegalArgumentException("User email is required");
 		}
 
 		var user = usersRepository
