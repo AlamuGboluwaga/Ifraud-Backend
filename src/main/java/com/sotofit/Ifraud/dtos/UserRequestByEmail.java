@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class UserRequestByEmail {
 
-@NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+	//@NotBlank(message = "Email is required")
+	//    @Email(message = "Invalid email format")
 	private String email;
 
 	public String getEmail() {

@@ -1,6 +1,7 @@
 package com.sotofit.Ifraud.ErrorHandler;
 
 import java.awt.datatransfer.StringSelection;
+import java.lang.IllegalArgumentException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +34,14 @@ public class GlobalExceptionHandler {
 		Map<String, String> errors = new HashMap<>();
 		errors.put("message", "Email was not found");
 		return ResponseEntity.badRequest().body(errors);
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public Map<String, String> ResourceNotFoundException(IllegalArgumentException ex) {
+		log.warn(" {}", ex.getMessage());
+
+		Map<String, String> errors = new HashMap<>();
+		errors.put("message", "Enter user email");
+		return errors;
 	}
 }

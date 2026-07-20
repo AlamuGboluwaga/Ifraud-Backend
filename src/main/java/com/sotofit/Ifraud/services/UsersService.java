@@ -40,7 +40,7 @@ public class UsersService {
 		String email = requestByEmail.getEmail();
 		System.out.println("emailAddress " + email);
 		if (email.isBlank()) {
-			throw new IllegalArgumentException("User email is required");
+			throw new IllegalArgumentException();
 		}
 
 		var user = usersRepository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException());
