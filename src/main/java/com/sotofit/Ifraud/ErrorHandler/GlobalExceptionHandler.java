@@ -52,4 +52,13 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 	}
+
+	@ExceptionHandler(AccountAlreadyExistException.class)
+	public ResponseEntity<Map<String, String>> handleAccountAlreadyExistException(AccountAlreadyExistException ex) {
+		Map<String, String> errors = new HashMap<>();
+		log.warn("{}", ex.getMessage());
+		errors.put("message", ex.getMessage());
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+	}
 }

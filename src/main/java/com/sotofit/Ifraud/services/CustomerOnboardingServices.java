@@ -1,5 +1,6 @@
 package com.sotofit.Ifraud.services;
 
+import com.sotofit.Ifraud.ErrorHandler.AccountAlreadyExistException;
 import com.sotofit.Ifraud.ErrorHandler.EmailAllReadyExistException;
 import com.sotofit.Ifraud.dtos.CreditRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberRequestDto;
@@ -38,7 +39,9 @@ public class CustomerOnboardingServices {
 		if (repository.existsByEmail(requestDto.getEmail())) {
 			throw new EmailAllReadyExistException("Email already exist");
 		}
-
+		if (repository.existsByAccount(requestDto.getAccountNumber())) {
+			throw new AccountAlreadyExistException("Account already exist");
+		}
 
 		var toBeSaved = customerOnBoardingMapper.toEntity(requestDto);
 
