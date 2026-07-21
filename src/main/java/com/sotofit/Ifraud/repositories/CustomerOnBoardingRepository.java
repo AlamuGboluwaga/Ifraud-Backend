@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface CustomerOnBoardingRepository extends JpaRepository<CustomerOnboarding, UUID> {
 
     Optional<CustomerOnboarding> findByAccountNumber(String accountNumber);
+    boolean existsByEmail(String email);
 }

@@ -22,7 +22,7 @@ public class CustomerOnBoardingDto {
 	private String email;
 
 	@NotBlank
-	@Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
+	@Size(max = 10, min = 10, message = "Account Number  must be 10 digits ")
 	private String accountNumber;
 
 	@NotNull

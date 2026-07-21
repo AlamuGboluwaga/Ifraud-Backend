@@ -1,6 +1,6 @@
 package com.sotofit.Ifraud.services;
 
-import com.sotofit.Ifraud.ErrorHandler.ResourceNotFoundException;
+import com.sotofit.Ifraud.ErrorHandler.EmailNotFoundException;
 import com.sotofit.Ifraud.dtos.UserRequestByEmail;
 import com.sotofit.Ifraud.dtos.UserUpdateRequest;
 import com.sotofit.Ifraud.dtos.UsersRequest;
@@ -9,7 +9,6 @@ import com.sotofit.Ifraud.entities.Users;
 import com.sotofit.Ifraud.mapper.UsersMapper;
 import com.sotofit.Ifraud.repositories.UsersRepository;
 import java.util.List;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,12 +37,10 @@ public class UsersService {
 
 	public UsersResponse getUserByEmail(UserRequestByEmail requestByEmail) {
 		String email = requestByEmail.getEmail();
-		System.out.println("emailAddress " + email);
-		if (email.isBlank()) {
-			throw new IllegalArgumentException();
-		}
 
-		var user = usersRepository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException());
+		var user = usersRepository
+			.findByEmail(email)
+			.orElseThrow(() -> new EmailNotFoundException("Email " + email + " was not found"));
 
 		return usersmapper.toDto(user);
 	}

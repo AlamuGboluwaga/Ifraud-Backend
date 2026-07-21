@@ -1,18 +1,16 @@
 package com.sotofit.Ifraud.services;
 
+import com.sotofit.Ifraud.ErrorHandler.EmailAllReadyExistException;
 import com.sotofit.Ifraud.dtos.CreditRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberRequestDto;
 import com.sotofit.Ifraud.dtos.CustomerAccountNumberResponseDto;
 import com.sotofit.Ifraud.dtos.CustomerOnBoardingDto;
-import com.sotofit.Ifraud.entities.CustomerOnboarding;
 import com.sotofit.Ifraud.mapper.CustomerAccountNumberRequestMapper;
 import com.sotofit.Ifraud.mapper.CustomerAccountNumberResponseMapper;
 import com.sotofit.Ifraud.mapper.CustomerOnBoardingMapper;
 import com.sotofit.Ifraud.repositories.CustomerOnBoardingRepository;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +34,11 @@ public class CustomerOnboardingServices {
 		this.customerAccountNumberResponseMapper = customerAccountNumberResponseMapper;
 	}
 
-	public CustomerOnBoardingDto onBoard(CustomerOnBoardingDto requestDto) {
-		if (requestDto == null) {
-			throw new IllegalArgumentException("Customer onboarding request cannot be null");
+	public CustomerOnBoardingDto onBoardCustomer(CustomerOnBoardingDto requestDto) {
+		if (repository.existsByEmail(requestDto.getEmail())) {
+			throw new EmailAllReadyExistException("Email already exist");
 		}
+
 
 		var toBeSaved = customerOnBoardingMapper.toEntity(requestDto);
 

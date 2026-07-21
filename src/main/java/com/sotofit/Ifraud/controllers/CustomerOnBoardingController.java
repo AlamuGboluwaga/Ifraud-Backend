@@ -6,7 +6,7 @@ import com.sotofit.Ifraud.dtos.CustomerAccountNumberResponseDto;
 import com.sotofit.Ifraud.dtos.CustomerOnBoardingDto;
 import com.sotofit.Ifraud.services.CustomerOnboardingServices;
 import jakarta.validation.Valid;
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.UUID;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class CustomerOnBoardingController {
 
 	@PostMapping("/onboard-customer")
 	public ResponseEntity<CustomerOnBoardingDto> OnBoard(@Valid @RequestBody CustomerOnBoardingDto requestDto) {
-		var createdCustomer = services.onBoard(requestDto);
+		var createdCustomer = services.onBoardCustomer(requestDto);
 
 		return ResponseEntity.status(201).body(createdCustomer);
 	}

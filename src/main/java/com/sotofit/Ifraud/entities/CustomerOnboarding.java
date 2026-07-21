@@ -30,7 +30,7 @@ public class CustomerOnboarding {
 
 	@NotBlank
 	@Column(name = "account_number", nullable = false, unique = true)
-	@Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
+	@Size(max = 10, min = 10, message = "Account Number  must be 10 digits ")
 	private String accountNumber;
 
 	@NotNull
@@ -61,9 +61,9 @@ public class CustomerOnboarding {
 		this.updatedAt = LocalDateTime.now();
 	}
 
-	@NotBlank
-	@Column(name = "user_id", nullable = false)
-	private UUID userId;
+
+//	@Column(name = "user_id", nullable = false)
+//	private UUID userId;
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -129,11 +129,11 @@ public class CustomerOnboarding {
 		this.balance = balance;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
+//	public UUID getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(UUID userId) {
+//		this.userId = userId;
+//	}
 }
