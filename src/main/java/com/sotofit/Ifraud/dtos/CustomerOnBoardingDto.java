@@ -14,18 +14,18 @@ public class CustomerOnBoardingDto {
 	@NotBlank
 	private String firstName;
 
-	@NotBlank
+	@NotBlank(message = "Surname is required")
 	private String surName;
 
 	@Email(message = "Invalid email format")
-	@NotBlank
+	@NotBlank(message = "email is required")
 	private String email;
 
-	@NotBlank
+	@NotBlank(message = "Account number is required")
 	@Size(max = 10, min = 10, message = "Account Number  must be 10 digits ")
 	private String accountNumber;
 
-	@NotNull
+	@NotNull(message = "Balance is required")
 	private BigDecimal balance;
 
 	public UUID getId() {
