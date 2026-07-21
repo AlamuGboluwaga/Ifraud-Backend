@@ -10,7 +10,7 @@ public class CreditRequestDto {
 
 	@NotNull(message = "Account number is required")
     @Positive(message = "Account number can not be negative")
-    @Size(max = 11, min = 11, message = "Account Number must be 11 digits ")
+    @Size(max = 10, min = 10, message = "Account Number must be 11 digits ")
 	private String accountNumber;
 
 	@NotNull

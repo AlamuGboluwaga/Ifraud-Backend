@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 public class TransferRequestDto {
 
 	@NotBlank(message = "Account number is required")
-	@Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
+	@Size(max = 10, min = 10, message = "Account Number  must be 11 digits ")
 	private String fromAccountNumber;
 
 	@NotBlank(message = "Account number is required")
-	@Size(max = 11, min = 11, message = "Account Number  must be 11 digits ")
+	@Size(max = 10, min = 10, message = "Account Number  must be 11 digits ")
 	private String toAccountNumber;
 
 	@NotNull(message = "Amount is required")

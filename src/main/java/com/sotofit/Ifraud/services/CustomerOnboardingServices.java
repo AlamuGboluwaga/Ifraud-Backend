@@ -36,11 +36,13 @@ public class CustomerOnboardingServices {
 	}
 
 	public CustomerOnBoardingDto onBoardCustomer(CustomerOnBoardingDto requestDto) {
-		if (repository.existsByEmail(requestDto.getEmail())) {
-			throw new EmailAllReadyExistException("Email already exist");
+		var accountNumber = requestDto.getAccountNumber();
+		var email = requestDto.getEmail();
+		if (repository.existsByEmail(email)) {
+			throw new EmailAllReadyExistException("Email " + email + " already exist");
 		}
-		if (repository.existsByAccount(requestDto.getAccountNumber())) {
-			throw new AccountAlreadyExistException("Account already exist");
+		if (repository.existsByAccountNumber(accountNumber)) {
+			throw new AccountAlreadyExistException("Account number " + accountNumber + " already exist");
 		}
 
 		var toBeSaved = customerOnBoardingMapper.toEntity(requestDto);

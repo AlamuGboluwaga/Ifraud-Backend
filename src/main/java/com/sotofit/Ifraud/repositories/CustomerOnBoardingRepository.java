@@ -13,5 +13,5 @@ public interface CustomerOnBoardingRepository extends JpaRepository<CustomerOnbo
 
     Optional<CustomerOnboarding> findByAccountNumber(String accountNumber);
     boolean existsByEmail(String email);
-    boolean existsByAccount(String accountNumber);
+    boolean existsByAccountNumber(String accountNumber);
 }
