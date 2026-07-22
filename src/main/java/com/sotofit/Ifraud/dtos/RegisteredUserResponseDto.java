@@ -21,22 +21,11 @@ public class RegisteredUserResponseDto {
 	@NotBlank(message = "Email is required")
 	private String email;
 
-	@NotBlank(message = "Password is required")
-	private String password;
-
 	@NotBlank(message = "Role is required")
 	private String role;
 
 	@NotNull(message = "Active is required")
 	private Boolean isActive;
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getRole() {
 		return role;

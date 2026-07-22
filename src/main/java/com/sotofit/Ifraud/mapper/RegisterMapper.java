@@ -14,6 +14,8 @@ public class RegisterMapper {
 		dto.setLastName(registerUser.getLastName());
 		dto.setEmail(registerUser.getEmail());
 		dto.setIsActive(registerUser.getIsActive());
+        dto.setRole(registerUser.getRole());
+        dto.setIsActive(registerUser.getIsActive());
 		return dto;
 	}
 }

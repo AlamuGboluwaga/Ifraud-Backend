@@ -5,12 +5,14 @@ import com.sotofit.Ifraud.dtos.UserUpdateRequest;
 import com.sotofit.Ifraud.dtos.UsersRequest;
 import com.sotofit.Ifraud.dtos.UsersResponse;
 import com.sotofit.Ifraud.services.UsersService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Tag(name = "Users", description = "API for managing users")
 public class UsersController {
 
 	private final UsersService usersService;
